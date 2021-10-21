@@ -5,13 +5,18 @@ N = L*L*L
 
 M = np.zeros((L,L,L))# 3d array representing unit cell
 active_atoms = []
-for i in range(L):
-    for j in range(L):
-        for k in range(L):
-            if (i+j+k)%2==0:
-                M[i,j,k] = 1.0
-                active_atoms.append((i,j,k))
-                
+#for i in range(L):
+#    for j in range(L):
+#        for k in range(L):
+#            if (i+j+k)%2==0:
+#                M[i,j,k] = 1.0
+#                active_atoms.append((i,j,k))
+
+for (i, j, k) in itertools.product(range(L),range(L),range(L)):
+    if (i+j+k)%2==0:
+        M[i,j,k] =1.0
+        active_atoms.append((i,j,k))   
+        
 nbr = {i : [(i[0],(i[1]+1)%L,(i[2]+1)%L),
             (i[0],(i[1]-1)%L,(i[2]+1)%L),
             (i[0],(i[1]+1)%L,(i[2]-1)%L),
